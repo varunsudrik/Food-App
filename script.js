@@ -19,7 +19,8 @@ submit.addEventListener("click", (e) => {
   fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${val}`)
     .then((Response) => Response.json())
     .then((data) => {
-      heading[0].textContent = `<h2>Search result for term ${val}</h2>`;
+      heading[0].textContent = `Search result for term ${val}`;
+      console.log(data.meals);
       if (data.meals == null) {
         heading[0].textContent = `There are no result for term ${val}`;
       } else {
@@ -27,7 +28,11 @@ submit.addEventListener("click", (e) => {
           (meal) =>
             `<div class="meal">
             <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-          </div>`
+            <div class="meal-info" data-mealID = "${meal.idMeal}" />
+            <h3>${meal.strMeal}</h3>
+          </div>
+          
+          `
         );
       }
     });
